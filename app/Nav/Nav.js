@@ -1,18 +1,19 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { IoIosSettings } from "react-icons/io";
 import SettingDropDown from '../Dropdown/SettingDropDown';
-import { loginUser } from '../page';
+import { GlobalContext } from '../page';
 
 
 function Nav() {
 
     const [dropDownVisibilityStatus,setDropDownVisibilityStatus] = useState(false)
+    const {loginUserEmail} = useContext(GlobalContext)
 
     return (
         <div className='w-full h-20 flex justify-between'>
-            <h1 className='font-bold text-xl cursor-pointer'> {`Welcome ${loginUser}`} </h1>
+            <h1 className='font-bold text-xl cursor-pointer'> {`Welcome ${loginUserEmail}`} </h1>
 
             {/* Nav Content */}
 

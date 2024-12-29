@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 
 
 export const GlobalContext = createContext();
-export const loginUser = localStorage.getItem('token')?localStorage.getItem('token'):null;
 
 
 export default function Home() {
@@ -30,15 +29,15 @@ export default function Home() {
 
   useEffect(() => {
 
-    const loginEmail = localStorage.getItem('token')
+    const loginEmail = localStorage.getItem('token')?localStorage.getItem('token'):null;
     setLoginuserEmail(loginEmail)
-
+    console.log(loginEmail)
     if (loginEmail && loginUserEmail != null) {
       router.push('/');
       setIsLogin(true)
       socket.emit('loginSuccess', { userEmail: loginEmail })
     }
-    else{
+    else{console.log('not login')
       router.push('/login');
       setIsLogin(false)
     }
