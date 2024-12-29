@@ -15,10 +15,25 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 const app = express();
-const port = process.env.port || 4000;
+const port = process.env.PORT || 4000;
+
+console.log(port)
 
 // Ensure that Next.js is fully prepared before proceeding
 nextApp.prepare().then(() => {
+
+    // Create HTTP server and attach Socket.IO
+    const httpServer = createServer(app);
+    const io = new Server(httpServer, {cors :{
+      origin: ['https://socketapp-11814d460297.herokuapp.com'],
+      credentials: true
+    }
+  });
+  
+  app.use({cors: {
+    origin:['https://socketapp-11814d460297.herokuapp.com'],
+    credentials: true
+  }})
   // Serve API routes (if any)
 
   // For all other requests, let Next.js handle routing
@@ -32,13 +47,7 @@ nextApp.prepare().then(() => {
     })
   })
 
-  // Create HTTP server and attach Socket.IO
-  const httpServer = createServer(app);
-  const io = new Server(httpServer, {cors :{
-    origin: ['https://socketapp-11814d460297.herokuapp.com'],
-    credentials: true
-  }
-});
+
 
 
 
@@ -46,7 +55,6 @@ nextApp.prepare().then(() => {
 
   io.on('connection', (socket) => {
 
-    console.log(`Total connected clients: ${io.of('/').sockets.size}`);
 
     socket.on('loginSuccess', ({ userEmail }) => {
       allUsers.set(userEmail, socket.id)
