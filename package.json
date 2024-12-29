@@ -4,10 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "nodemon server.js",
-    "lint": "next lint"
+    "start": "node server.js"
   },
   "dependencies": {
     "@next/env": "^15.1.3",
