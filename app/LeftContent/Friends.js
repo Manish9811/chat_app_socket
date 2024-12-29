@@ -25,7 +25,7 @@ function Friends() {
 
             {/* Connectedd friends parent container */}
 
-            <div className='h-full w-80 overflow-scroll p-3 flex items-start justify-center'>
+            <div className='h-full w-80 overflow-scroll p-3 flex flex-col items-start justify-center'>
 
                 {/* Friends details contain container */}
 
