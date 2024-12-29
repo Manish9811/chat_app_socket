@@ -26,7 +26,7 @@ nextApp.prepare().then(() => {
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
       cors: {
-        origin: 'https://socketapp-11814d460297.herokuapp.com', // Update with your Next.js app's domain
+        origin: ['https://socketapp-11814d460297.herokuapp.com','http://localhost:3000'], // Update with your Next.js app's domain
         methods: ['GET', 'POST'],
         credentials: true,
       },
