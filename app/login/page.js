@@ -33,7 +33,7 @@ function page() {
 
         try {
             // toast.loading("Please wait")
-            const data = await axios.post(`http://localhost:3000/api/login`, {
+            const data = await axios.post(`https://socketapp-11814d460297.herokuapp.com/api/login`, {
                 email, password
             })
             window.localStorage.setItem('token', email);

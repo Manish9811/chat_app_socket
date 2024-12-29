@@ -48,7 +48,7 @@ function page() {
     // Handle sign up logic here, e.g., API call to register the user
 
     try{
-      const serverResponse = await axios.post(`http://localhost:3000/api/register`, {
+      const serverResponse = await axios.post(`https://socketapp-11814d460297.herokuapp.com/api/register`, {
         email,password,confirmPassword
       })
 

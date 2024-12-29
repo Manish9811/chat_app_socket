@@ -2,4 +2,4 @@
 
 import { io } from "socket.io-client";
 
-export const socket = io('https://chat-app-socket-eta.vercel.app');
+export const socket = io('https://socketapp-11814d460297.herokuapp.com');
