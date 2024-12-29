@@ -3,18 +3,18 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  
-    "main": "server.js",
-    "scripts": {
-   "dev": "next dev",
+  "main": "server.js",
+  "scripts": {
+    "dev": "next dev",
     "build": "next build",
     "start": "node server.js",
+    "postinstall": "npm run build",
     "heroku-postbuild": "npm install"
-    
   },
   "dependencies": {
     "@next/env": "^15.1.3",
     "axios": "^1.7.9",
+    "bufferutil": "^4.0.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
@@ -30,7 +30,9 @@
     "react-toastify": "^11.0.2",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
-    "validator": "^13.12.0"
+    "utf-8-validate": "^6.0.5",
+    "validator": "^13.12.0",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -41,8 +43,7 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   },
- "engines": {
-  "node": "18.x"
-}
-
+  "engines": {
+    "node": "22.x"
+  }
 }
