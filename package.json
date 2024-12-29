@@ -5,9 +5,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+   "start": "node server.js",
+    "heroku-postbuild":"npm install"
   },
   "dependencies": {
     "@next/env": "^15.1.3",
