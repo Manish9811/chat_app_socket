@@ -34,10 +34,11 @@ nextApp.prepare().then(() => {
 
   // Create HTTP server and attach Socket.IO
   const httpServer = createServer(app);
-  const io = new Server(httpServer, cors({
-    origin: 'https://socketapp-11814d460297.herokuapp.com',
+  const io = new Server(httpServer, {cors :{
+    origin: ['https://socketapp-11814d460297.herokuapp.com'],
     credentials: true
-  }));
+  }
+});
 
 
 
