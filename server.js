@@ -29,7 +29,7 @@ nextApp.prepare().then(() => {
   // Create HTTP server and attach Socket.IO
   const httpServer = createServer(app);
   const io = new Server(httpServer, cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://chat-app-socket-eta.vercel.app',
     credentials: true
   }));
 
