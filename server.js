@@ -24,16 +24,19 @@ nextApp.prepare().then(() => {
 
     // Create HTTP server and attach Socket.IO
     const httpServer = createServer(app);
-    const io = new Server(httpServer, {cors :{
-      origin: ['https://socketapp-11814d460297.herokuapp.com'],
-      credentials: true
-    }
-  });
+    const io = new Server(httpServer, {
+      cors: {
+        origin: 'https://socketapp-11814d460297.herokuapp.com', // Update with your Next.js app's domain
+        methods: ['GET', 'POST'],
+        credentials: true,
+      },
+    });
   
-  app.use({cors: {
-    origin:['https://socketapp-11814d460297.herokuapp.com'],
-    credentials: true
-  }})
+    app.use(cors({
+      origin: ['https://socketapp-11814d460297.herokuapp.com'], // Allowed origins
+      credentials: true, // Allow credentials
+    }));
+    
   // Serve API routes (if any)
 
   // For all other requests, let Next.js handle routing
