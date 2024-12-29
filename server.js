@@ -26,6 +26,12 @@ nextApp.prepare().then(() => {
     return handle(req, res); // Next.js will handle this request
   });
 
+  app.get('/', (req,res)=>{
+    return res.json({
+      message : "all good"
+    })
+  })
+
   // Create HTTP server and attach Socket.IO
   const httpServer = createServer(app);
   const io = new Server(httpServer, cors({
