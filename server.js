@@ -26,7 +26,7 @@ nextApp.prepare().then(() => {
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
       cors: {
-        origin: ['https://socketapp-11814d460297.herokuapp.com','http://localhost:3000'], // Update with your Next.js app's domain
+        origin: ['https://socketapp-11814d460297.herokuapp.com'], // Update with your Next.js app's domain
         methods: ['GET', 'POST'],
         credentials: true,
       },
@@ -34,6 +34,7 @@ nextApp.prepare().then(() => {
   
     app.use(cors({
       origin: ['https://socketapp-11814d460297.herokuapp.com'], // Allowed origins
+      methods:'*',
       credentials: true, // Allow credentials
     }));
     
@@ -43,15 +44,6 @@ nextApp.prepare().then(() => {
   app.all('*', (req, res) => {
     return handle(req, res); // Next.js will handle this request
   });
-
-  app.get('/', (req,res)=>{
-    return res.json({
-      message : "all good"
-    })
-  })
-
-
-
 
 
   const allUsers = new Map();
