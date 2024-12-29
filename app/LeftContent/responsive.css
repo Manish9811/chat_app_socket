@@ -1,0 +1,24 @@
+@media screen and (max-width: 768px) {
+    .mainContainer{
+        width: 60%;
+        position: absolute;
+        z-index: 100;
+        background-color: cyan;
+        top: 15%;
+    }
+    .hideMenu{
+        position: fixed;
+        left: -70%;
+    }
+    .showMenu{
+        position: fixed;
+        left: 0%;
+    }
+}
+
+@media screen and (max-width: 648px) {
+    .messageContainer{
+        position: absolute;
+        left: -20%;
+    }
+}
