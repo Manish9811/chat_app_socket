@@ -15,7 +15,7 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 const app = express();
-const port = 3000;
+const port = process.env.port || 4000;
 
 // Ensure that Next.js is fully prepared before proceeding
 nextApp.prepare().then(() => {
