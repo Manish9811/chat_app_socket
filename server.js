@@ -33,7 +33,7 @@ nextApp.prepare().then(() => {
     });
   
     app.use(cors({
-      origin: 'https://socketapp-11814d460297.herokuapp.com', // Allowed origins
+      origin: ['https://socketapp-11814d460297.herokuapp.com', 'http://localhost:3000'], // Allowed origins
       methods:'*',
       credentials: true, // Allow credentials
     }));
@@ -51,41 +51,24 @@ nextApp.prepare().then(() => {
   io.on('connection', (socket) => {
 
 
-    socket.on('loginSuccess', ({ userEmail }) => {
-      allUsers.set(userEmail, socket.id)
-      socket.emit('loginSuccess', userEmail)
-      socket.broadcast.emit('newUserDetected', userEmail);
+    socket.on('loginSuccess', ({ loginUserId }) => {
+      
+      loginUserId && allUsers.set(loginUserId, socket.id);
+
+      console.log(allUsers)
+
+
     })
 
-    socket.on('allConnectedUserEmail', () => {
-      const userData = Array.from(allUsers.keys())
-      socket.broadcast.emit("allUserData", [...userData]);
-      socket.emit("allUserData", [...userData])
-    })
-
-    socket.on('messageSent', ({ loginUser, by, to, sendMessage }) => {
+    socket.on('messageSent', ({ loginUser, to, sendMessage }) => {
+      console.log(loginUser, to, sendMessage)
       const receiver = allUsers.get(to);
-      let clientMessage;
-      console.log(loginUser , by , to)
-      if (loginUser == by) {
-        clientMessage =
-        {
-          sender: by,
-          receiver: to,
-          message: sendMessage
-        }
-      }
 
-      else {
-        clientMessage =
-        {
-          sender: to,
-          receiver: by,
-          message: sendMessage
-        }
-      }
-      socket.to(receiver).emit("transferMessage", clientMessage);
+      console.log(allUsers)
 
+      console.log(to)
+
+      socket.to(receiver).emit('messageReceive',{messageSentBy : loginUser, receivedBy : to, message : sendMessage})
     })
 
     socket.on('disconnect', () => {

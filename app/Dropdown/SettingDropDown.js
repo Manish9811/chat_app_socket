@@ -4,6 +4,8 @@ import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -11,9 +13,14 @@ import { useRouter } from 'next/navigation';
 function SettingDropDown() {
     const router = useRouter()
 
-    const logout = () => {
-        localStorage.clear();
-        router.push('/login')
+    const logout = async () => {
+        try{
+            await axios.get(`http://localhost:3000/api/logout`);
+            router.push('/login')
+        }
+        catch(e){
+            toast.error("Logout failed !")
+        }
 
     }
 

@@ -14,26 +14,40 @@ function page() {
     const [isLogin,setIsLogin] = useState(false);
 
 
-    useEffect(()=> {
-        if(window.localStorage.getItem('token')){
-            socket.emit('loginSuccess',email );
-            setIsLogin(true);
+
+
+
+
+    useEffect(() => {
+
+        async function checkLogin() {
+    
+          try {
+            const serverResponse = await axios.get('http://localhost:3000/api/loginCheck');
+            const loginUserEmail = serverResponse.data.loginUserData.email;
             router.push('/');
+            setIsLogin(true)
+            socket.emit('loginSuccess', { userEmail: loginUserEmail })
+    
+          }
+          catch (e) {
+            router.push('/login');
+            return setIsLogin(false)
+          }
         }
-        else{
-            setIsLogin(false)
-        }
-    },[])
-
-
-
+    
+        checkLogin();
+    
+    
+      }, [])
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
             // toast.loading("Please wait")
-            const data = await axios.post(`https://socketapp-11814d460297.herokuapp.com/api/login`, {
+            const data = await axios.post(`https://socketapp-11814d460297.herokuapp.com`, {
                 email, password
             })
             window.localStorage.setItem('token', email);
@@ -43,7 +57,8 @@ function page() {
         }
         catch (e) {
             console.log(e)
-            return toast.error('Login error !! Please try again', );
+            const errMessage = e.response.data.message ? e.response.data.message : 'Login error !! Please try again'
+            return toast.error(errMessage);
 
         }
 

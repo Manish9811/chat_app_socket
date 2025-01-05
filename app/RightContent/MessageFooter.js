@@ -17,7 +17,8 @@ function MessageFooter() {
   const [userInputMessage,setUserInputMessage] = useState('');
   const {emojiVisibilityStatus, setEmojiVisibilityStatus} = useContext(MyContext)
   const {activeChat,setActiveChat} = useContext(GlobalContext);
-  const {chats, setChats} = useContext(GlobalContext)
+  const {chats, setChats} = useContext(GlobalContext);
+  const {loginUserDetails} = useContext(GlobalContext)
 
 
 
@@ -46,22 +47,28 @@ function MessageFooter() {
   },[])
 
   const sendMessage = () => {
-    const loginUser = localStorage.getItem('token');
   
+    console.log(activeChat)
 
     const ownMessages = {
-      sender : loginUser,
-      receiver : activeChat,
+      messageSentBy : loginUserDetails.loginUserId,
+      receivedBy : activeChat,
       message : userInputMessage
     }
 
-    console.log(ownMessages)
+
+    console.log(activeChat)
 
     setChats((prevData) => [
-      ...prevData,ownMessages
+      ...prevData,{
+        messageSentBy : loginUserDetails.loginUserId,
+        receivedBy : activeChat,
+        message : userInputMessage,
+        status : 'sentMessage'
+      }
     ])
     
-    socket.emit('messageSent', {loginUser, by : loginUser, to : activeChat, sendMessage : userInputMessage});
+    socket.emit('messageSent', {loginUser : loginUserDetails.loginUserId, to : activeChat, sendMessage : userInputMessage});
 
 
     setEmojiVisibilityStatus(false)

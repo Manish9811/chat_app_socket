@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 function page() {
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isLogin,setIsLogin] = useState(false);
@@ -48,14 +50,18 @@ function page() {
     // Handle sign up logic here, e.g., API call to register the user
 
     try{
-      const serverResponse = await axios.post(`https://socketapp-11814d460297.herokuapp.com/api/register`, {
-        email,password,confirmPassword
+      const serverResponse = await axios.post(`https://socketapp-11814d460297.herokuapp.com`, {
+        userName,email,password,confirmPassword
       })
 
-      console.log(serverResponse)
+  
+      toast.success('register Success ! please login now');
+      router.push('/login')
+
     }
     catch(e){
-      console.log(e)
+      const errMessage = e.response.data.message?e.response.data.message:"Something went wrong";
+      toast.error(errMessage)
     }
     // Redirect to login page after successful signup
     //   router.push('/login');
@@ -72,12 +78,28 @@ function page() {
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div>
+            <label htmlFor="Username" className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
-              type="email"
+              type="text  "
               id="email"
               name="email"
               value={email}

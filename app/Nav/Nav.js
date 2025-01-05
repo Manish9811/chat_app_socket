@@ -9,11 +9,11 @@ import { GlobalContext } from '../page';
 function Nav() {
 
     const [dropDownVisibilityStatus,setDropDownVisibilityStatus] = useState(false)
-    const {loginUserEmail} = useContext(GlobalContext)
+    const {loginUserDetails} = useContext(GlobalContext)
 
     return (
         <div className='w-full h-20 flex justify-between'>
-            <h1 className='font-bold text-xl cursor-pointer'> {`Welcome ${loginUserEmail}`} </h1>
+            <h1 className='font-bold text-xl cursor-pointer'> {`Welcome, ${loginUserDetails.userName}`} </h1>
 
             {/* Nav Content */}
 
