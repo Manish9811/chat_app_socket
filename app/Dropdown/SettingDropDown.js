@@ -15,7 +15,7 @@ function SettingDropDown() {
 
     const logout = async () => {
         try{
-            await axios.get(`http://localhost:3000/api/logout`);
+            await axios.get(`https://socketapp-11814d460297.herokuapp.com`);
             router.push('/login')
         }
         catch(e){
