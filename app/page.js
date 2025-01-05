@@ -33,7 +33,7 @@ export default function Home() {
     async function checkLogin() {
 
       try {
-        const serverResponse = await axios.get('http://localhost:3000/api/loginCheck');
+        const serverResponse = await axios.get('https://socketapp-11814d460297.herokuapp.com');
         setLoginUserDetails({ userName: serverResponse.data.loginUserData.userName, email: serverResponse. data.loginUserData.email, loginUserId: serverResponse.data.loginUserData.token })
         socket.emit('loginSuccess', { loginUserId: serverResponse.data.loginUserData.token })
         router.push('/');
