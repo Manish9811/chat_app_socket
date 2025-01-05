@@ -9,7 +9,6 @@ const connection = new Sequelize(process.env.database_name, process.env.database
     dialect: 'mysql', // Choose 'mysql', 'sqlite', 'mariadb', 'mssql' based on your DB
     logging: false,
     dialectModule: mysql2,
-    logging:(msg)=>'',
     dialectOptions: {
         charset: 'utf8mb4'
     },

@@ -5,7 +5,6 @@ export async function GET(req) {
     const cookieStore = await cookies();
 
     try{
-        console.log("token : "+cookieStore.get('token'))
     if (cookieStore.get('token') != null) {
         const loginUserId = cookieStore.get('token').value;
         const getLoginUserInfo = await registerUser.findAll({ where: { loginUserId: loginUserId } });
