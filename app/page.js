@@ -34,7 +34,7 @@ export default function Home() {
     async function checkLogin() {
 
       try {
-        const serverResponse = await axios.get(`${ServerUrl}/loginCheck`);
+        const serverResponse = await axios.get(`${ServerUrl}/api/loginCheck`);
         setLoginUserDetails({ userName: serverResponse.data.loginUserData.userName, email: serverResponse. data.loginUserData.email, loginUserId: serverResponse.data.loginUserData.token })
         socket.emit('loginSuccess', { loginUserId: serverResponse.data.loginUserData.token })
         router.push('/');

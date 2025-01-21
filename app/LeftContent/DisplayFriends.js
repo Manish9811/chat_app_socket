@@ -1,7 +1,6 @@
 'use client'
 import React, { useContext, useEffect } from 'react'
 import { GlobalContext, ServerUrl } from '../page'
-import { socket } from '../socket'
 import axios from 'axios'
 
 function DisplayFriends() {
@@ -17,7 +16,7 @@ function DisplayFriends() {
        async function fetchFriends(){
 
         try{
-        const serverData = await axios.get(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/fetchFriends` : ServerUrl}`,{
+        const serverData = await axios.get(`${ServerUrl}/api/fetchFriends`,{
             withCredentials: true
         });
         setAllUsers(serverData.data.message)

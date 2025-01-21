@@ -43,7 +43,7 @@ function page() {
     // Handle sign up logic here, e.g., API call to register the user
 
     try{
-      const serverResponse = await axios.post(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/register` : ServerUrl}`, {
+      const serverResponse = await axios.post(`${ServerUrl}/api/register`, {
         userName,email,password,confirmPassword
       })
 
