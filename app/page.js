@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 export const GlobalContext = createContext();
-console.log(process.env.NEXT_PUBLIC_NODE_ENV)
+console.log(process.env.NEXT_PUBLIC_NODE_ENV) 
 export const ServerUrl = process.env.NEXT_PUBLIC_NODE_ENV == 'production' ? 'https://socketapp-11814d460297.herokuapp.com' : `http://localhost:${process.env.NEXT_PUBLIC_PORT}/api`
 
 
