@@ -33,9 +33,11 @@ nextApp.prepare().then(() => {
   
     app.use(cors({
       origin: `${process.env.NODE_ENV == 'production'?'https://socketapp-11814d460297.herokuapp.com':'http://localhost:3000'}`, // Allowed origins
-      methods:'*',
+      methods:['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       credentials: true, // Allow credentials
     }));
+    app.options('*', cors());
+
     
   // Serve API routes (if any)
 
