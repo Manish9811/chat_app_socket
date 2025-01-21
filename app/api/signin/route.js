@@ -1,4 +1,3 @@
-import validator from 'validator';
 import { registerUser } from '../database/schems';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers'
@@ -6,6 +5,8 @@ import { cookies } from 'next/headers'
 export async function POST(req, response) {
   const body = await req.json();
   const { email, password } = body;
+
+  console.log(email,password)
 
   try {
 

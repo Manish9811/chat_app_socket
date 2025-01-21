@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { ServerUrl } from '../page';
 
 
 
@@ -15,7 +16,8 @@ function SettingDropDown() {
 
     const logout = async () => {
         try{
-            await axios.get(`https://socketapp-11814d460297.herokuapp.com`);
+           const data = await axios.get(`${ServerUrl}/logout`);
+           console.log(data)
             router.push('/login')
         }
         catch(e){

@@ -1,11 +1,11 @@
 'use client'
 import axios from 'axios';
 import Link from 'next/link';
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { GlobalContext } from '../page.js';
 import { socket } from '../socket';
 import { useRouter } from 'next/navigation.js';
+import { ServerUrl } from '../page';
 
 function page() {
     const router = useRouter();
@@ -18,28 +18,31 @@ function page() {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function checkLogin() {
+    //     async function checkLogin() {
+    //         console.log(process.env.NODE_ENV)
+
     
-          try {
-            const serverResponse = await axios.get('http://localhost:3000/api/loginCheck');
-            const loginUserEmail = serverResponse.data.loginUserData.email;
-            router.push('/');
-            setIsLogin(true)
-            socket.emit('loginSuccess', { userEmail: loginUserEmail })
+    //       try {
+    //         const serverResponse = await axios.get('http://localhost:3000/api/loginCheck');
+    //         console.log(serverResponse)
+    //         const loginUserEmail = serverResponse.data.loginUserData.email;
+    //         router.push('/');
+    //         setIsLogin(true)
+    //         socket.emit('loginSuccess', { userEmail: loginUserEmail })
     
-          }
-          catch (e) {
-            router.push('/login');
-            return setIsLogin(false)
-          }
-        }
+    //       }
+    //       catch (e) {
+    //         router.push('/login');
+    //         return setIsLogin(false)
+    //       }
+    //     }
     
-        checkLogin();
+    //     checkLogin();
     
     
-      }, [])
+    //   }, [])
     
 
     const handleSubmit = async (e) => {
@@ -47,9 +50,10 @@ function page() {
 
         try {
             // toast.loading("Please wait")
-            const data = await axios.post(`https://socketapp-11814d460297.herokuapp.com`, {
+            const data = await axios.post(`${ServerUrl}/signin`, {
                 email, password
             })
+            console.log(data)
             window.localStorage.setItem('token', email);
             socket.emit('loginSuccess',{ userEmail: email });
             router.push('/')
@@ -57,7 +61,7 @@ function page() {
         }
         catch (e) {
             console.log(e)
-            const errMessage = e.response.data.message ? e.response.data.message : 'Login error !! Please try again'
+            const errMessage = e.response?.data.message ? e.response.data.message : 'Login error !! Please try again'
             return toast.error(errMessage);
 
         }

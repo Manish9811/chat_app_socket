@@ -4,7 +4,6 @@ import { Server } from 'socket.io';
 import next from 'next';
 import dotenv from 'dotenv';
 import cors from 'cors'
-import { all } from 'axios';
 
 dotenv.config();  // Load environment variables from .env file
 
@@ -17,7 +16,7 @@ const handle = nextApp.getRequestHandler();
 const app = express();
 const port = process.env.PORT || 4000;
 
-console.log(port)
+console.log(process.env)
 
 // Ensure that Next.js is fully prepared before proceeding
 nextApp.prepare().then(() => {
@@ -26,14 +25,14 @@ nextApp.prepare().then(() => {
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
       cors: {
-        origin: 'https://socketapp-11814d460297.herokuapp.com', // Update with your Next.js app's domain
+        origin: `${process.env.NODE_ENV == 'production'?'https://socketapp-11814d460297.herokuapp.com':'http://localhost:3000'}`, // Allowed origins
         methods: '*',
         credentials: true,
       },
     });
   
     app.use(cors({
-      origin: 'https://socketapp-11814d460297.herokuapp.com', // Allowed origins
+      origin: `${process.env.NODE_ENV == 'production'?'https://socketapp-11814d460297.herokuapp.com':'http://localhost:3000'}`, // Allowed origins
       methods:'*',
       credentials: true, // Allow credentials
     }));

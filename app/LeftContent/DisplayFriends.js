@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext, useEffect } from 'react'
-import { GlobalContext } from '../page'
+import { GlobalContext, ServerUrl } from '../page'
 import { socket } from '../socket'
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ function DisplayFriends() {
        async function fetchFriends(){
 
         try{
-        const serverData = await axios.get(`https://socketapp-11814d460297.herokuapp.com`,{
+        const serverData = await axios.get(`${ServerUrl}/fetchFriends`,{
             withCredentials: true
         });
         setAllUsers(serverData.data.message)

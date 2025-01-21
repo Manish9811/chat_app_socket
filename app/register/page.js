@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
+import { ServerUrl } from '../page';
 
 function page() {
   const router = useRouter();
@@ -20,15 +21,7 @@ function page() {
 
   
   
-      useEffect(()=> {
-          if(window.localStorage.getItem('token')){
-              setIsLogin(true);
-              router.push('/');
-          }
-          else{
-              setIsLogin(false)
-          }
-      },[])
+  
   
 
   const handleSubmit = async (e) => {
@@ -50,7 +43,7 @@ function page() {
     // Handle sign up logic here, e.g., API call to register the user
 
     try{
-      const serverResponse = await axios.post(`https://socketapp-11814d460297.herokuapp.com`, {
+      const serverResponse = await axios.post(`${ServerUrl}/register`, {
         userName,email,password,confirmPassword
       })
 
