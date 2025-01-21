@@ -17,7 +17,7 @@ function DisplayFriends() {
        async function fetchFriends(){
 
         try{
-        const serverData = await axios.get(`${ServerUrl}/fetchFriends`,{
+        const serverData = await axios.get(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/fetchFriends` : {ServerUrl}}`,{
             withCredentials: true
         });
         setAllUsers(serverData.data.message)
