@@ -50,7 +50,7 @@ function page() {
 
         try {
             // toast.loading("Please wait")
-            const data = await axios.post(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/login` : {ServerUrl}}`, {
+            const data = await axios.post(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/login` : ServerUrl}`, {
                 email, password
             })
             console.log(data)

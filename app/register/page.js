@@ -43,7 +43,7 @@ function page() {
     // Handle sign up logic here, e.g., API call to register the user
 
     try{
-      const serverResponse = await axios.post(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/register` : {ServerUrl}}`, {
+      const serverResponse = await axios.post(`${process.env.NEXT_PUBLIC_NODE_ENV == 'development' ? `${ServerUrl}/register` : ServerUrl}`, {
         userName,email,password,confirmPassword
       })
 
@@ -56,8 +56,7 @@ function page() {
       const errMessage = e.response.data.message?e.response.data.message:"Something went wrong";
       toast.error(errMessage)
     }
-    // Redirect to login page after successful signup
-    //   router.push('/login');
+
   };
 
  
