@@ -50,7 +50,7 @@ function page() {
 
         try {
             // toast.loading("Please wait")
-            const data = await axios.post(`${ServerUrl}/signin`, {
+            const data = await axios.post(`${ServerUrl}`, {
                 email, password
             })
             console.log(data)
